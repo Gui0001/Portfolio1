@@ -359,7 +359,7 @@
   }
   
   .services .serv-content .card {
-    width: calc(33% - 20px);
+    width: calc();
     background: #222;
     text-align: center;
     border-radius: 10px;
@@ -915,18 +915,20 @@
   }
 
  /* Styles for Documentations section */
- .documentations {
+.documentations {
   padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  background-color: #f0f8ff; /* Light blue background */
 }
 
- body {
+body {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
+  color: #1c3d5a; /* Darker blue for text */
 }
 
 .documentations .max-width {
@@ -935,9 +937,10 @@
 }
 
 .documentations .title {
-  font-size: 24px;
+  font-size: 26px; /* Slightly larger font for title */
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #007acc; /* Blue for title */
 }
 
 .documentations-content ul {
@@ -952,8 +955,13 @@
 
 .documentations-content ul li a {
   text-decoration: underline;
-  color: #333;
+  color: #005f99; /* Lighter blue for links */
   font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.documentations-content ul li a:hover {
+  color: #003f73; /* Darker blue on hover */
 }
 
 @media screen and (max-width: 768px) {
@@ -961,5 +969,3 @@
     padding: 10px;
   }
 }
-
-
