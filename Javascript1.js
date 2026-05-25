@@ -1,48 +1,35 @@
-// Récupérer le formulaire
-const form = document.getElementById('contact-form');
+document.addEventListener("DOMContentLoaded", () => {
+  const navbar = document.querySelector(".navbar");
+  const menu = document.querySelector(".navbar .menu");
+  const burger = document.querySelector(".navbar .max-width > .menu-btn");
+  const burgerIcon = burger ? burger.querySelector("i") : null;
+  const scrollButton = document.querySelector(".scroll-up-btn");
 
-// Écouter l'événement de soumission du formulaire
-form.addEventListener('submit', (e) => {
-  // Empêcher le comportement par défaut du formulaire
-  e.preventDefault();
+  const updateScrollState = () => {
+    const isScrolled = window.scrollY > 80;
+    navbar?.classList.toggle("sticky", isScrolled);
+    scrollButton?.classList.toggle("show", isScrolled);
+  };
 
-  // Récupérer les valeurs des champs
-  const name = form.elements['name'].value;
-  const email = form.elements['email'].value;
-  const subject = form.elements['subject'].value;
-  const message = form.elements['message'].value;
+  burger?.addEventListener("click", () => {
+    menu?.classList.toggle("active");
+    burgerIcon?.classList.toggle("active");
+  });
 
-  // Valider les champs (vous pouvez ajouter des validations supplémentaires ici)
-  if (name === '' || email === '' || subject === '' || message === '') {
-    alert('Veuillez remplir tous les champs du formulaire.');
-    return;
-  }
-
-  // Envoyer les données à votre serveur (vous devrez implémenter cette partie)
-  // Utilisez la méthode fetch() ou une bibliothèque AJAX pour envoyer les données
-  // à votre serveur de traitement de formulaires
-  // Exemple avec fetch() :
-  fetch('https://votre-serveur.com/votre-endpoint', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      subject,
-      message,
-    }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert('Votre message a été envoyé avec succès.');
-        form.reset();
-      } else {
-        throw new Error('Une erreur s\'est produite lors de l\'envoi du message.');
-      }
-    })
-    .catch((error) => {
-      alert(error.message);
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("active");
+      burgerIcon?.classList.remove("active");
     });
+  });
+
+  scrollButton?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  window.addEventListener("scroll", updateScrollState, { passive: true });
+  updateScrollState();
 });
